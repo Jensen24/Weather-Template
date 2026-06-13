@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://coqjp8ahtxwxc"]
+
+[ext_resource type="Script" uid="uid://bpvp1nqo2flpe" path="res://Scripts/main.gd" id="1_8gbba"]
+[ext_resource type="PackedScene" uid="uid://doh0w0if3r85g" path="res://Scenes/character.tscn" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://bgkumimvy4b3k" path="res://Assets/vecteezy_dramatic-panorama-sky-with-storm-cloud-on-a-cloudy-day_8217179.jpg" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dcqmhi4hfyej6" path="res://Scenes/weather_controller.tscn" id="5_kry3j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y27ut"]
+albedo_color = Color(0.21811607, 0.3307087, 0.11841927, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jjvhh"]
+material = SubResource("StandardMaterial3D_y27ut")
+size = Vector2(1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kry3j"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kry3j"]
+panorama = ExtResource("4_jjvhh")
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_21xkr"]
+sky_material = SubResource("PanoramaSkyMaterial_kry3j")
+
+[sub_resource type="Environment" id="Environment_jjgbg"]
+background_mode = 2
+sky = SubResource("Sky_21xkr")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.5686275, 0.62352943, 0.6313726, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8gbba"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jjvhh"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="main" type="Node" unique_id=1272092871]
+script = ExtResource("1_8gbba")
+
+[node name="character" parent="." unique_id=1868607935 instance=ExtResource("1_jjgbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24100876, 0)
+
+[node name="ground" type="Node3D" parent="." unique_id=2016048719]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground" unique_id=726728264]
+transform = Transform3D(70.47995, 0, 0, 0, 0.2329045, 0, 0, 0, 47.372776, 0.65086746, -0.012707233, 1.5352019)
+mesh = SubResource("PlaneMesh_jjvhh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ground/MeshInstance3D" unique_id=1972390446]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/MeshInstance3D/StaticBody3D" unique_id=751876808]
+shape = SubResource("ConcavePolygonShape3D_kry3j")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="ground/MeshInstance3D" unique_id=1568155733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
+size = Vector3(1, 1, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=287529383]
+environment = SubResource("Environment_jjgbg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=694481645]
+transform = Transform3D(1, 0, 0, 0, 0.54601425, 0.83777595, 0, -0.83777595, 0.54601425, 0, 18.761698, 20.233356)
+light_energy = 0.4
+
+[node name="triggers" type="Node3D" parent="." unique_id=857362956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.458028, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="triggers" unique_id=1436036226]
+transform = Transform3D(3, 0, 0, 0, 0.396, 0, 0, 0, 3, -6.4436646, -0.0026944876, 8.812452)
+mesh = SubResource("BoxMesh_8gbba")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="triggers/MeshInstance3D" unique_id=114070472]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="triggers/MeshInstance3D/StaticBody3D" unique_id=904863866]
+shape = SubResource("ConcavePolygonShape3D_jjvhh")
+
+[node name="Weather Controller" parent="." unique_id=2059448688 instance=ExtResource("5_kry3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.58872, 0)

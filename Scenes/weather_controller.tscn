@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dcqmhi4hfyej6"]
 
 [ext_resource type="Texture2D" uid="uid://d1uh0qv60g6y5" path="res://Assets/Circle.png" id="1_n1uu3"]
+[ext_resource type="Script" uid="uid://d0qhy3s4xk24m" path="res://Scenes/weather_controller.gd" id="1_y27ut"]
+[ext_resource type="Script" uid="uid://jgp02a2t5f8t" path="res://Scenes/player_tracker.gd" id="3_p0kti"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hoh5m"]
 emission_shape = 3
@@ -10,9 +12,6 @@ spread = 5.0
 initial_velocity_min = 0.7
 initial_velocity_max = 2.0
 color = Color(0.76862746, 0.8235294, 0.8745098, 1)
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
 
 [sub_resource type="Curve" id="Curve_hoh5m"]
 _limits = [0.0, 0.1, 0.0, 1.0]
@@ -31,41 +30,50 @@ use_particle_trails = true
 material = SubResource("StandardMaterial3D_hoh5m")
 curve = SubResource("Curve_hoh5m")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1uu3"]
-albedo_color = Color(0.21811607, 0.3307087, 0.11841927, 1)
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g4v7s"]
+emission_shape_scale = Vector3(6.5, 6.5, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_p0kti"]
-material = SubResource("StandardMaterial3D_n1uu3")
-size = Vector2(1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0kti"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_n1uu3")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_540mo"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="QuadMesh" id="QuadMesh_yf5fn"]
+material = SubResource("StandardMaterial3D_p0kti")
+size = Vector2(0.25, 0.25)
 
 [node name="Weather Controller" type="Node3D" unique_id=1981688755]
+script = ExtResource("1_y27ut")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=339831815]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31134033, 5.821983, 0.96146965)
+[node name="Rain" type="GPUParticles3D" parent="." unique_id=339831815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31134033, 13.933826, 0.96146965)
 amount = 1000
 lifetime = 2.0
 randomness = 0.4
+collision_base_size = 38.12
 visibility_aabb = AABB(-10, -20, -10, 20, 20, 20)
 trail_enabled = true
 trail_lifetime = 0.15000000000000002
 process_material = SubResource("ParticleProcessMaterial_hoh5m")
 draw_pass_1 = SubResource("RibbonTrailMesh_n1uu3")
 
-[node name="ground" type="Node3D" parent="." unique_id=234501233]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="PlayerTracker" type="Node3D" parent="." unique_id=609480628]
+script = ExtResource("3_p0kti")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ground" unique_id=1735738621]
-transform = Transform3D(70.47995, 0, 0, 0, 0.2329045, 0, 0, 0, 47.372776, 0.65086746, -0.012707233, 1.5352019)
-mesh = SubResource("PlaneMesh_p0kti")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="ground/MeshInstance3D" unique_id=2045729076]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/MeshInstance3D/StaticBody3D" unique_id=1294374575]
-shape = SubResource("ConcavePolygonShape3D_540mo")
-
-[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="ground/MeshInstance3D" unique_id=1716119673]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
-size = Vector3(1, 1, 1)
+[node name="Splashes" type="GPUParticles3D" parent="PlayerTracker" unique_id=1565397462]
+transform = Transform3D(1, 0, 0, 0, -0.0024824555, 0.9999969, 0, -0.9999969, -0.0024824555, 0, -0.17215693, 0.00025248528)
+amount = 75
+lifetime = 0.02
+speed_scale = 0.4
+randomness = 1.0
+visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
+process_material = SubResource("ParticleProcessMaterial_g4v7s")
+draw_pass_1 = SubResource("QuadMesh_yf5fn")

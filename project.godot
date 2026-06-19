@@ -12,7 +12,7 @@ config_version=5
 
 config/name="weather_test"
 run/main_scene="uid://coqjp8ahtxwxc"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+
+[global_group]
+
+Player=""
 
 [input]
 

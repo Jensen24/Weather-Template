@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://bgkumimvy4b3k" path="res://Assets/vecteezy_dramatic-panorama-sky-with-storm-cloud-on-a-cloudy-day_8217179.jpg" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dcqmhi4hfyej6" path="res://Scenes/weather_controller.tscn" id="5_kry3j"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y27ut"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjvhh"]
 albedo_color = Color(0.21811607, 0.3307087, 0.11841927, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jjvhh"]
-material = SubResource("StandardMaterial3D_y27ut")
+material = SubResource("StandardMaterial3D_jjvhh")
 size = Vector2(1, 1)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kry3j"]
@@ -25,7 +25,6 @@ sky_material = SubResource("PanoramaSkyMaterial_kry3j")
 [sub_resource type="Environment" id="Environment_jjgbg"]
 background_mode = 2
 sky = SubResource("Sky_21xkr")
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.03
 volumetric_fog_albedo = Color(0.5686275, 0.62352943, 0.6313726, 1)
 
@@ -37,7 +36,7 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [node name="main" type="Node" unique_id=1272092871]
 script = ExtResource("1_8gbba")
 
-[node name="character" parent="." unique_id=1868607935 instance=ExtResource("1_jjgbg")]
+[node name="character" parent="." unique_id=1868607935 groups=["Player"] instance=ExtResource("1_jjgbg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24100876, 0)
 
 [node name="ground" type="Node3D" parent="." unique_id=2016048719]
@@ -61,8 +60,9 @@ size = Vector3(1, 1, 1)
 environment = SubResource("Environment_jjgbg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=694481645]
-transform = Transform3D(1, 0, 0, 0, 0.54601425, 0.83777595, 0, -0.83777595, 0.54601425, 0, 18.761698, 20.233356)
-light_energy = 0.4
+transform = Transform3D(1, 0, 0, 0, 0.7684488, 0.6399113, 0, -0.6399113, 0.7684488, 0, 18.761698, 20.233356)
+light_energy = 0.7
+sky_mode = 1
 
 [node name="triggers" type="Node3D" parent="." unique_id=857362956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.458028, 0, 0)
@@ -77,4 +77,4 @@ mesh = SubResource("BoxMesh_8gbba")
 shape = SubResource("ConcavePolygonShape3D_jjvhh")
 
 [node name="Weather Controller" parent="." unique_id=2059448688 instance=ExtResource("5_kry3j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.58872, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.598671, 0)

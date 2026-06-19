@@ -34,6 +34,7 @@ func _physics_process(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and Input.mouse_mode==Input.MOUSE_MODE_CAPTURED:
 		velocity.y += JUMP_VELOCITY
+		print("Player height is:", global_position)
 
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Vector3.ZERO

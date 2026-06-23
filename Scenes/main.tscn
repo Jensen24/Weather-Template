@@ -17,7 +17,6 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kry3j"]
 panorama = ExtResource("4_jjvhh")
-energy_multiplier = 0.8
 
 [sub_resource type="Sky" id="Sky_21xkr"]
 sky_material = SubResource("PanoramaSkyMaterial_kry3j")
@@ -61,6 +60,11 @@ environment = SubResource("Environment_jjgbg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=694481645]
 transform = Transform3D(1, 0, 0, 0, 0.7684488, 0.6399113, 0, -0.6399113, 0.7684488, 0, 18.761698, 20.233356)
+light_energy = 0.7
+sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=655416318]
+transform = Transform3D(1, 0, 0, 0, -0.86471516, 0.50226265, 0, -0.50226265, -0.86471516, 0, 18.761698, -22.689022)
 light_energy = 0.7
 sky_mode = 1
 

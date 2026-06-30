@@ -24,6 +24,7 @@ sky_material = SubResource("PanoramaSkyMaterial_kry3j")
 [sub_resource type="Environment" id="Environment_jjgbg"]
 background_mode = 2
 sky = SubResource("Sky_21xkr")
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.03
 volumetric_fog_albedo = Color(0.5686275, 0.62352943, 0.6313726, 1)
 

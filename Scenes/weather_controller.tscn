@@ -18,7 +18,7 @@ sub_emitter_amount_at_collision = 1
 
 [sub_resource type="Curve" id="Curve_hoh5m"]
 _limits = [0.0, 0.1, 0.0, 1.0]
-_data = [Vector2(0.008955218, 0.0014218017), 0.0, 0.0, 0, 0, Vector2(0.020895518, 0.04686019), 0.42999604, 0.42999604, 0, 0, Vector2(0.99999994, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.011940293, 0.09846154), 0.0, 0.0, 0, 0, Vector2(0.5074627, 0.049999997), -0.30212206, -0.30212206, 0, 0, Vector2(0.99999994, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hoh5m"]
@@ -31,7 +31,22 @@ use_particle_trails = true
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_n1uu3"]
 material = SubResource("StandardMaterial3D_hoh5m")
+size = 0.5
+sections = 4
+section_length = 0.3
 curve = SubResource("Curve_hoh5m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d0u6y"]
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_fcnqv"]
+radius = 0.2
+cap_top = false
+
+[sub_resource type="Gradient" id="Gradient_p3ub1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_540mo"]
+gradient = SubResource("Gradient_p3ub1")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g4v7s"]
 emission_shape_scale = Vector3(6.5, 6.5, 1)
@@ -41,21 +56,38 @@ emission_ring_height = 1.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 0.0
 emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.827451, 0.827451, 0.827451, 1)
+color_ramp = SubResource("GradientTexture1D_540mo")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
 sub_emitter_mode = 1
 sub_emitter_frequency = 4.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkcys"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
 [sub_resource type="QuadMesh" id="QuadMesh_yf5fn"]
-size = Vector2(0.25, 0.25)
+material = SubResource("StandardMaterial3D_vkcys")
+size = Vector2(0.15, 0.15)
+
+[sub_resource type="Gradient" id="Gradient_540mo"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bpvwk"]
+gradient = SubResource("Gradient_540mo")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p0kti"]
 gravity = Vector3(0, 0, 0)
+color = Color(0.827451, 0.827451, 0.827451, 1)
+color_ramp = SubResource("GradientTexture1D_bpvwk")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0kti"]
 transparency = 1
 cull_mode = 2
+shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("4_540mo")
 billboard_mode = 1
@@ -71,31 +103,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31134033, 13.933826, 0.9614
 amount = 1000
 lifetime = 2.0
 randomness = 0.4
-collision_base_size = 38.12
+fixed_fps = 60
 visibility_aabb = AABB(-10, -20, -10, 20, 20, 20)
 trail_enabled = true
 trail_lifetime = 0.15000000000000002
 process_material = SubResource("ParticleProcessMaterial_hoh5m")
 draw_pass_1 = SubResource("RibbonTrailMesh_n1uu3")
 
+[node name="Lightning" type="GPUParticles3D" parent="." unique_id=1575514605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.934, 0)
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_d0u6y")
+draw_pass_1 = SubResource("TubeTrailMesh_fcnqv")
+
 [node name="PlayerTracker" type="Node3D" parent="." unique_id=609480628]
 script = ExtResource("3_p0kti")
 
-[node name="Splashes" type="GPUParticles3D" parent="PlayerTracker" unique_id=1565397462]
+[node name="Impact Marks" type="GPUParticles3D" parent="PlayerTracker" unique_id=1565397462]
 transform = Transform3D(1, 0, 0, 0, -0.0024824555, 0.9999969, 0, -0.9999969, -0.0024824555, 0, -0.17215693, 0.00025248528)
 amount = 60
-sub_emitter = NodePath("Impact")
-lifetime = 0.02
+sub_emitter = NodePath("Impact Mist")
+lifetime = 0.09999999999999999
 speed_scale = 0.4
 visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
 process_material = SubResource("ParticleProcessMaterial_g4v7s")
 draw_pass_1 = SubResource("QuadMesh_yf5fn")
 
-[node name="Impact" type="GPUParticles3D" parent="PlayerTracker/Splashes" unique_id=413956670]
+[node name="Impact Mist" type="GPUParticles3D" parent="PlayerTracker/Impact Marks" unique_id=413956670]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 emitting = false
-amount = 60
-lifetime = 0.05
+amount = 15
+lifetime = 0.09999999999999999
 speed_scale = 0.5
 visibility_aabb = AABB(-10, -10, -10, 20, 20, 20)
 draw_order = 1
